@@ -1,0 +1,4 @@
+Name: Append `WITH (nolock)`
+Description: Appends 'WITH (nolock)' to tables in 'SQL' queries.
+Binding: nolock
+Interactive: true

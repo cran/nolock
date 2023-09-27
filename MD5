@@ -1,0 +1,9 @@
+b07bf2de5b89e2316d1b887f0f8efb45 *DESCRIPTION
+bd4c578d134493d59e515c157bf9bfef *NAMESPACE
+52f30d30037c6802772304fe2a05198e *R/nolock.R
+a707b08614183756ff56a6443e156aef *inst/rstudio/addins.dcf
+6345925a089fdf21a010c5bb0381e5b0 *man/crayon.Rd
+7be13306aab21402385e5aef12d94b1c *man/nolock.Rd
+937d07bcf4e73e42dbd6e7284cb0cece *man/rstudioapi.Rd
+1dd8a8232a2858da524b27d9d2590c93 *man/stringr.Rd
+c627b6685d9f6d91ddad948a648b994a *man/utils.Rd

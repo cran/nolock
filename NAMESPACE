@@ -1,0 +1,6 @@
+exportPattern("^[[:alpha:]]+")
+    importFrom("stats", "na.omit")
+    importFrom("utils", "file.edit")
+    import(crayon)
+    import(rstudioapi)
+    import(stringr)
