@@ -1,20 +1,10 @@
-#'* ---------------------------------------------------------------------------*
-#'*                  Append 'WITH (nolock)' to 'SQL' Queries                   *
-#'* ---------------------------------------------------------------------------*
-
-crayon <- rstudioapi <- utils <- stringr <- NULL
-
 nolock <- function(query = NULL) {
-  pacman::p_load(crayon, rstudioapi, utils, stringr)
 
   #'* Loading data *
 
   message(crayon::blue$bold("Please enter a valid 'SQL' query into the opened temporal file..."))
 
   temp_nolock_path <- tempfile(pattern = "nolock_", fileext = ".sql")
-  # write("", file = temp_nolock_path)
-
-  # ... rest of the function ...
 
   if (is.null(query)) {
     if (interactive()) {
@@ -33,7 +23,7 @@ nolock <- function(query = NULL) {
     sql_code <- query
   }
 
-  if (length(grep("SELECT|FROM|WHERE|JOIN|UPDATE|DELETE", sql_code, ignore.case = TRUE)) == 0) {
+  if (length(grep("SELECT|FROM|WHERE|JOIN|UPDATE|DELETE", sql_code, ignore.case = T)) == 0) {
     stop("\nInvalid or empty 'SQL' query.")
   }
 
@@ -74,12 +64,12 @@ nolock <- function(query = NULL) {
       "while", "for", "user", "option", "cursor"
     )
     for (i in 1:length(omit_words)) {
-      omit_words[i] <- gsub("(.)", "[\\1\\U\\1]", omit_words[i], perl = TRUE)
+      omit_words[i] <- gsub("(.)", "[\\1\\U\\1]", omit_words[i], perl = T)
       omit_words[i] <- paste0("|", omit_words[i], "\\b")
     }
     omit_words_s <- c("select", "create", "declare", "delete", "is", "IS") # | ommited words after 'WITH'
     for (i in 1:length(omit_words_s)) {
-      omit_words_s[i] <- gsub("(.)", "[\\1\\U\\1]", omit_words_s[i], perl = TRUE)
+      omit_words_s[i] <- gsub("(.)", "[\\1\\U\\1]", omit_words_s[i], perl = T)
       omit_words_s[i] <- paste0("|\\s*?", omit_words_s[i], "\\b")
     }
 
@@ -112,9 +102,9 @@ nolock <- function(query = NULL) {
     SQL_PATTERN_MATCH <- SQL_PATTERN_MATCH[!grepl(pattern, SQL_PATTERN_MATCH)]
 
     # Match table names with aliases, reset position, then split the text.
-    unlist(strsplit(sql_code, regex_pattern_cut, perl = TRUE))
+    unlist(strsplit(sql_code, regex_pattern_cut, perl = T))
 
-    sql_code <- unlist(strsplit(sql_code, regex_pattern_cut, perl = TRUE))
+    sql_code <- unlist(strsplit(sql_code, regex_pattern_cut, perl = T))
 
     #'* Merging the text *
 
@@ -127,7 +117,7 @@ nolock <- function(query = NULL) {
 
     # Cleaning: removing spaces before 'WITH (nolock)' if they exist.
     for (i in 1:nrow(regex_match)) {
-      if (regex_match[i, 2] == TRUE) {
+      if (regex_match[i, 2] == T) {
         if (stringr::str_sub(regex_match[i, 1], start = -1) == " ") {
           regex_match[i, 1] <- substr(regex_match[i, 1], 1, nchar(regex_match[i, 1]) - 1)
         }
@@ -137,7 +127,7 @@ nolock <- function(query = NULL) {
     }
 
     for (i in 1:nrow(regex_match)) {
-      if (regex_match[i, 2] == TRUE) {
+      if (regex_match[i, 2] == T) {
         regex_match[i, 1] <- paste0(regex_match[i, 1], " WITH (nolock) ")
       } else {
         NULL
@@ -189,11 +179,11 @@ nolock <- function(query = NULL) {
 
     if (length(SQL_PATTERN_MATCH) > 0) {
       # Determine the length of the longest string in SQL_PATTERN_MATCH
-      max_length <- max(nchar(gsub("\\h+", " ", SQL_PATTERN_MATCH, perl = TRUE))) + 2
+      max_length <- max(nchar(gsub("\\h+", " ", SQL_PATTERN_MATCH, perl = T))) + 2
 
       # Loop through the table names and print the formatted string
       for (table_name in SQL_PATTERN_MATCH) {
-        formatted_string <- gsub("\\h+", " ", table_name, perl = TRUE)
+        formatted_string <- gsub("\\h+", " ", table_name, perl = T)
         combined_string <- paste0(
           crayon::blue(formatted_string),
           crayon::yellow(" WITH "),

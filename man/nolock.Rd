@@ -14,7 +14,8 @@ Returns the processed 'SQL' query as a character vector with 'WITH (nolock)'
 added for each table in the query.
 }
 \arguments{
-\item{query}{Character vector. SQL query to be processed. If NULL, a temporary SQL text document is opened for user input.}
+\item{query}{Character vector. 'SQL' query to be processed. If NULL, a temporary
+'SQL' text document is opened for user input.}
 }
 \examples{
 

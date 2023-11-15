@@ -2,3 +2,19 @@ Name: Append `WITH (nolock)`
 Description: Appends 'WITH (nolock)' to tables in 'SQL' queries.
 Binding: nolock
 Interactive: true
+
+Name: Packages Used in the Script
+Description: Get the names of used packages in the active 'R' script.
+Binding: libr_used
+Interactive: true
+
+Name: Packages Unused in the Script
+Description: Get the names of all package that are both called within an 'R'
+script and installed in the environment but are never used.
+Binding: libr_unused
+Interactive: true
+
+Name: Packages Called in the Script
+Description: Names of package called within the script and installed in the environment.
+Binding: libr_called()
+Interactive: true
